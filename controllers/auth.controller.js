@@ -33,7 +33,7 @@ module.exports = {
         where: { username: body.username },
       });
       if (!user) {
-        return next(createError(res, 401, "Nguời dùng không tồn tại"));
+        return next(createError(res, 401, "Nguời dùng không tồn tại"));S
       }
       const comparePassword = bcrypt.compareSync(body.password, user.password);
       if (!comparePassword)
@@ -41,7 +41,7 @@ module.exports = {
           createError(res, 401, "Mật khẩu hoặc tài khoản không đúng")
         );
       const isBanned = await db.User.findOne({
-        where: { username: body.username, status: 0 },
+        where: { username: body.username, status: false },
       });
       if (isBanned)
         return next(
