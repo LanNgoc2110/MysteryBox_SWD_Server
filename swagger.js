@@ -5,8 +5,8 @@ const doc = {
         title: "NodeJs + MySQL API",
         description: "NodeJs + MySQL API",
     },
-    host: 'https://mysterybox-swd-server.onrender.com',
-    schemes: ['https']
+    host: 'localhost:8080',
+    schemes: ['http']
 }
 
 const outputFile = './swagger-output.json'
