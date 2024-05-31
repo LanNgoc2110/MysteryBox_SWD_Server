@@ -34,6 +34,5 @@ app.listen(8080, () => {
   console.log("Server is running port 8080");
 });
 
-//deploy lên render
 
 
