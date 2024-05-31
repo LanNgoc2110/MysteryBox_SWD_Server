@@ -5,7 +5,7 @@
     "description": "NodeJs + MySQL API",
     "version": "1.0.0"
   },
-  "host": "https://mysterybox-swd-server-1.onrender.com",
+  "host": "mysterybox-swd-server-1.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -36,7 +36,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "OK"
           }
         }
       }
