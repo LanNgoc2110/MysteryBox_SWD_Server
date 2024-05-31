@@ -21,11 +21,11 @@
             "schema": {
               "type": "object",
               "properties": {
-                "password": {
-                  "example": "any"
-                },
                 "username": {
                   "example": "any"
+                },
+                "password": {
+                  "example": ""
                 },
                 "phone": {
                   "example": "any"
@@ -73,7 +73,7 @@
         "description": "",
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "OK"
           }
         }
       }
