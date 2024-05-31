@@ -5,7 +5,7 @@ const doc = {
         title: "NodeJs + MySQL API",
         description: "NodeJs + MySQL API",
     },
-    host: 'https://mysterybox-swd-server-1.onrender.com',
+    host: 'mysterybox-swd-server-1.onrender.com',
     schemes: ['https']
 }
 
