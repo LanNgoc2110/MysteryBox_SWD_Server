@@ -5,15 +5,23 @@ module.exports = {
     await queryInterface.createTable("KidProfiles", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.BIGINT,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.fn("UUID"),
       },
       userId: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: "Users",
+          key: "id",
+        },
+      },
+      themeId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "Themes",
           key: "id",
         },
       },

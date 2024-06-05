@@ -2,50 +2,44 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("PackageOrders", {
+    await queryInterface.createTable("PackageInPeriods", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.fn("UUID"),
+      },
+      periodId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "Periods",
+          key: "id",
+        },
+      },
+      boxId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "MysteryBoxes",
+          key: "id",
+        },
+      },
+      packageOrderId: {
         type: Sequelize.INTEGER,
-      },
-      kidId: {
-        type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: "KidProfiles",
+          model: "PackageOrders",
           key: "id",
         },
       },
-      packageId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "Packages",
-          key: "id",
-        },
-      },
-      totalPrice: {
-        type: Sequelize.STRING,
-      },
-      nameOfAdult: {
-        type: Sequelize.STRING,
-      },
-      nameOfKid: {
-        type: Sequelize.STRING,
-      },
-      phone: {
-        type: Sequelize.STRING,
-      },
-      email: {
-        type: Sequelize.STRING,
-      },
-      additionalNotes: {
+
+      endBy: {
         type: Sequelize.STRING,
       },
       status: {
-        type: Sequelize.ENUM(["Pending", "Cancel", "Finished"]),
-        defaultValue: "Pending",
+        type: Sequelize.ENUM(["PENDING", "FINISHED"]),
+        defaultValue: "PENDING",
       },
       createdAt: {
         allowNull: false,
@@ -58,6 +52,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("PackageOrders");
+    await queryInterface.dropTable("PackageInPeriods");
   },
 };

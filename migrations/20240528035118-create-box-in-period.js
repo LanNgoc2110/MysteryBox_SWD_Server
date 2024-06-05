@@ -1,51 +1,38 @@
 "use strict";
+
+const { DataTypes } = require("sequelize");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("PackageOrders", {
+    await queryInterface.createTable("BoxInPeriods", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.fn("UUID"),
       },
-      kidId: {
+      periodId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: "KidProfiles",
+          model: "Periods",
           key: "id",
         },
       },
-      packageId: {
+      boxId: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: "Packages",
+          model: "MysteryBoxes",
           key: "id",
         },
       },
-      totalPrice: {
+      quantity: {
         type: Sequelize.STRING,
       },
-      nameOfAdult: {
-        type: Sequelize.STRING,
-      },
-      nameOfKid: {
-        type: Sequelize.STRING,
-      },
-      phone: {
-        type: Sequelize.STRING,
-      },
-      email: {
-        type: Sequelize.STRING,
-      },
-      additionalNotes: {
-        type: Sequelize.STRING,
-      },
-      status: {
-        type: Sequelize.ENUM(["Pending", "Cancel", "Finished"]),
-        defaultValue: "Pending",
+      used: {
+        type: DataTypes.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -58,6 +45,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("PackageOrders");
+    await queryInterface.dropTable("BoxInPeriods");
   },
 };

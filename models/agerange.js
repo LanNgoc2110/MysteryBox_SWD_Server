@@ -14,8 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   AgeRange.init({
-    age: DataTypes.STRING,
- 
+    firstName: DataTypes.STRING,
+    lastName: DataTypes.STRING,
+    email: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'AgeRange',

@@ -13,15 +13,18 @@ module.exports = (sequelize, DataTypes) => {
   }
   PackageOrder.init(
     {
-      kidId: DataTypes.BIGINT,
-      packageId: DataTypes.BIGINT,
+      kidId: DataTypes.UUID,
+      packageId: DataTypes.UUID,
       totalPrice: DataTypes.STRING,
       nameOfAdult: DataTypes.STRING,
       nameOfKid: DataTypes.STRING,
       phone: DataTypes.STRING,
       email: DataTypes.STRING,
       additionalNotes: DataTypes.STRING,
-      status: DataTypes.BOOLEAN,
+      status: {
+        type: DataTypes.ENUM,
+        values: ["Pending", "Cancel", "Finished"],
+      },
     },
     {
       sequelize,
