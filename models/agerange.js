@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class AgeRange extends Model {
+    /*Hello  */
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
