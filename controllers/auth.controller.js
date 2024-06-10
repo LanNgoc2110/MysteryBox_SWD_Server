@@ -33,7 +33,7 @@ module.exports = {
         where: { username: body.username },
       });
       if (!user) {
-        return next(createError(res, 401, "Nguời dùng không tồn tại"));
+        return next(createError(res, 401, "Nguời dùng không tồn tại"));S
       }
       const comparePassword = bcrypt.compareSync(body.password, user.password);
       if (!comparePassword)
