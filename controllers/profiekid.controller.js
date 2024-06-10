@@ -21,7 +21,9 @@ module.exports = {
   getProfileByUserId: async (req, res, next) => {
     try {
       const user = req.user;
-      const kidProfiles = await db.KidProfile.findAll();
+      const kidProfiles = await db.KidProfile.findAll({
+        where: { status: true },
+      });
       const kidProfilesByUserId = kidProfiles.filter(
         (profile) => profile.userId === user.userId
       );
@@ -85,10 +87,17 @@ module.exports = {
         );
       }
       await existedProfile.update({ status: status });
-      return res.json({
-        success: true,
-        message: "Ban tài khoản của con thành công",
-      });
+      if (status === 0) {
+        return res.json({
+          success: true,
+          message: "Ban tài khoản của con thành công",
+        });
+      } else {
+        return res.json({
+          success: true,
+          message: "Mở ban tài khoản của con thành công",
+        });
+      }
     } catch (error) {
       return next(createError(res, 500, error.message));
     }

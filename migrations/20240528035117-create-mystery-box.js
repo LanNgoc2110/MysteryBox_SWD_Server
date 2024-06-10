@@ -2,50 +2,34 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("PackageOrders", {
+    await queryInterface.createTable("MysteryBoxes", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      kidId: {
         type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "KidProfiles",
-          key: "id",
-        },
+        defaultValue: Sequelize.fn("UUID"),
       },
-      packageId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: "Packages",
-          key: "id",
-        },
-      },
-      totalPrice: {
+      name: {
         type: Sequelize.STRING,
       },
-      nameOfAdult: {
+      image: {
         type: Sequelize.STRING,
       },
-      nameOfKid: {
+      priceAvarage: {
         type: Sequelize.STRING,
       },
-      phone: {
+      description: {
         type: Sequelize.STRING,
       },
-      email: {
+      qrCode: {
         type: Sequelize.STRING,
       },
-      additionalNotes: {
+      quantityProInBox: {
         type: Sequelize.STRING,
       },
       status: {
-        type: Sequelize.ENUM(["Pending", "Cancel", "Finished"]),
-        defaultValue: "Pending",
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
       },
       createdAt: {
         allowNull: false,
@@ -58,6 +42,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("PackageOrders");
+    await queryInterface.dropTable("MysteryBoxes");
   },
 };
