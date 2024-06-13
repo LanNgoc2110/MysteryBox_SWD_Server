@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -13,22 +11,38 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Product.init({
-    name: DataTypes.STRING,
-    image: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.STRING,
-    quantity: DataTypes.STRING,
-    gender: DataTypes.STRING,
-    color: DataTypes.STRING,
-    type: DataTypes.STRING,
-    material: DataTypes.STRING,
-    origin: DataTypes.STRING,
-    status: DataTypes.STRING,
-
-  }, {
-    sequelize,
-    modelName: 'Product',
-  });
+  Product.init(
+    {
+      boxId: DataTypes.INTEGER,
+      themeId: DataTypes.INTEGER,
+      name: DataTypes.STRING,
+      images: {
+        type: DataTypes.TEXT,
+        get() {
+          const rawValue = this.getDataValue("images");
+          return rawValue ? JSON.parse(rawValue) : [];
+        },
+        set(arrayImages) {
+          this.setDataValue("images", JSON.stringify(arrayImages));
+        },
+      },
+      description: DataTypes.STRING,
+      price: DataTypes.FLOAT,
+      quantity: DataTypes.FLOAT,
+      gender: {
+        type: DataTypes.ENUM,
+        values: ["female", "male", "all"],
+      },
+      color: DataTypes.STRING,
+      type: DataTypes.STRING,
+      material: DataTypes.STRING,
+      origin: DataTypes.STRING,
+      status: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: "Product",
+    }
+  );
   return Product;
 };
