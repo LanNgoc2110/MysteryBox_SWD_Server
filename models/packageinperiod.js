@@ -13,13 +13,17 @@ module.exports = (sequelize, DataTypes) => {
   }
   PackageInPeriod.init(
     {
-      periodId: DataTypes.UUID,
-      boxId: DataTypes.UUID,
+      periodId: DataTypes.INTEGER,
+      boxId: DataTypes.INTEGER,
       packageOrderId: DataTypes.INTEGER,
-      endBy: DataTypes.STRING,
+      productId: DataTypes.INTEGER,
+      openingDate: DataTypes.DATE,
+      packagingDate: DataTypes.DATE,
+      deliveryDate: DataTypes.DATE,
+      confirmDate: DataTypes.DATE,
       status: {
         type: DataTypes.ENUM,
-        values: ["PENDING", "FINISHED"],
+        values: ["OPEN", "DELIVERY", "PACK", "CONFIRM"],
       },
     },
     {

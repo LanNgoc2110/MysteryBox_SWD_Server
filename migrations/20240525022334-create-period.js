@@ -6,8 +6,8 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.fn("UUID"),
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
       },
       season: {
         type: Sequelize.ENUM(["Spring", "Summer", "Fall", "Winter"]),

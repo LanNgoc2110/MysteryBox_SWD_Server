@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       kidId: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "KidProfiles",
@@ -18,7 +18,7 @@ module.exports = {
         },
       },
       packageId: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "Packages",
@@ -40,8 +40,8 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
       },
-      additionalNotes: {
-        type: Sequelize.STRING,
+      packageInPeriodIds: {
+        type: Sequelize.TEXT,
       },
       status: {
         type: Sequelize.ENUM(["Pending", "Cancel", "Finished"]),

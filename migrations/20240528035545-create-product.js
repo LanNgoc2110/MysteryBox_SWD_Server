@@ -2,18 +2,18 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("KidProfiles", {
+    await queryInterface.createTable("Products", {
       id: {
         allowNull: false,
-        primaryKey: true,
         autoIncrement: true,
+        primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      boxId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Users",
+          model: "MysteryBoxes",
           key: "id",
         },
       },
@@ -25,20 +25,26 @@ module.exports = {
           key: "id",
         },
       },
-
-      fullName: {
+      name: {
         type: Sequelize.STRING,
       },
-      descriptionHobby: {
+      images: {
+        type: Sequelize.TEXT,
+      },
+      description: {
         type: Sequelize.STRING,
-        required: true,
+      },
+      price: {
+        type: Sequelize.FLOAT,
+        defaultValue: 0,
+      },
+      quantity: {
+        type: Sequelize.FLOAT,
+        defaultValue: 0,
       },
       gender: {
-        type: Sequelize.ENUM(["MALE", "FEMALE", "OTHER"]),
-        defaultValue: "MALE",
-      },
-      yob: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM(["female", "male", "all"]),
+        defaultValue: "all",
       },
       color: {
         type: Sequelize.STRING,
@@ -49,7 +55,7 @@ module.exports = {
       material: {
         type: Sequelize.STRING,
       },
-      toyOrigin: {
+      origin: {
         type: Sequelize.STRING,
       },
       status: {
@@ -67,6 +73,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("KidProfiles");
+    await queryInterface.dropTable("Products");
   },
 };
