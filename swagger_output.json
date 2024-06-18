@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "title": "MysteryBoxAPIs",
     "description": "All APIs for MysteryBoxAPIs website"
   },
@@ -20,12 +20,8 @@
   
   "tags": [
     {
-      "name": "Auth",
+      "name": "Authenticate",
       "description": "APIs for authentication"
-    },
-    {
-      "name": "User",
-      "description": "APIs for users"
     },
     {
       "name": "Kid Profile",
@@ -49,7 +45,7 @@
     },
     {
       "name": "Theme",
-      "description": "APIs for products"
+      "description": "APIs for theme"
     },
     {
       "name": "Period",
@@ -60,7 +56,7 @@
   "paths": {
     "/api/v1/register": {
       "post": {
-        "tags": ["User"],
+        "tags": ["Authenticate"],
         "description": "",
         "parameters": [
           {
@@ -91,7 +87,7 @@
     },
     "/api/v1/login": {
       "post": {
-        "tags": ["User"],
+        "tags": ["Authenticate"],
         "description": "",
         "parameters": [
           {
@@ -179,7 +175,7 @@
     },
     "/api/v1/ban-profile/{id}": {
       "patch": {
-        "tags": ["User"],
+        "tags": ["Authenticate"],
         "description": "",
         "parameters": [
           {
@@ -617,7 +613,7 @@
         }
       }
     },
-    "/api/v1/get-mysterybox": {
+    "/api/v1/get-mysterybox": { 
       "get": {
         "tags": ["MysteryBox"],
         "description": "",
@@ -838,92 +834,11 @@
     },
     "/api/auth/google": {
       "get": {
-        "tags": ["Auth"],
+        "tags": ["Authenticate"],
         "description": "",
         "responses": {
           "default": {
             "description": ""
-          }
-        }
-      }
-    },
-    "/api/auth/google/callback": {
-      "get": {
-        "tags": ["Auth"],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/auth/login-oauth-success": {
-      "post": {
-        "tags": ["Auth"],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/register": {
-      "post": {
-        "tags": ["Auth"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "password": {
-                  "example": "any"
-                },
-                "username": {
-                  "example": "any"
-                },
-                "phone": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          }
-        }
-      }
-    },
-    "/login": {
-      "post": {
-        "tags": ["Auth"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
