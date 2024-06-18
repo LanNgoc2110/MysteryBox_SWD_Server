@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "MysteryBoxAPIs",
+    "description": "All APIs for MysteryBoxAPIs website"
   },
-  "host": "localhost:8080",
+  "host": "mysterybox-swd-server-qkfx.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
   "securityDefinitions": {
@@ -20,21 +20,42 @@
   
   "tags": [
     {
+      "name": "Auth",
+      "description": "APIs for authentication"
+    },
+    {
       "name": "User",
-      "description": "Operations about users"
+      "description": "APIs for users"
+    },
+    {
+      "name": "Kid Profile",
+      "description": "APIs for kid profile"
     },
     {
       "name": "Product",
-      "description": "Operations about products"
+      "description": "APIs for products"
+    },
+    {
+      "name": "Package",
+      "description": "APIs for package"
+    },
+    {
+      "name": "MysteryBox",
+      "description": "APIs for mysterybox"
     },
     {
       "name": "Order",
-      "description": "Operations about orders"
+      "description": "APIs for orders"
     },
     {
-      "name": "Auth",
-      "description": "Operations about authentication"
+      "name": "Theme",
+      "description": "APIs for products"
+    },
+    {
+      "name": "Period",
+      "description": "APIs for periods"
     }
+    
   ],
   "paths": {
     "/api/v1/register": {
@@ -98,7 +119,7 @@
     },
     "/api/v1/create-profile": {
       "post": {
-        "tags": ["User"],
+        "tags": ["Kid Profile"],
         "description": "",
         "parameters": [
           {
@@ -116,7 +137,7 @@
     },
     "/api/v1/get-profiles": {
       "get": {
-        "tags": ["User"],
+        "tags": ["Kid Profile"],
         "description": "",
         "parameters": [
           {
@@ -134,7 +155,7 @@
     },
     "/api/v1/update-profile/{id}": {
       "patch": {
-        "tags": ["User"],
+        "tags": ["Kid Profile"],
         "description": "",
         "parameters": [
           {
@@ -194,7 +215,7 @@
     },
     "/api/v1/create-package": {
       "post": {
-        "tags": ["Order"],
+        "tags": ["Package"],
         "description": "",
         "parameters": [
           {
@@ -212,7 +233,7 @@
     },
     "/api/v1/get-package": {
       "get": {
-        "tags": ["Order"],
+        "tags": ["Package"],
         "description": "",
         "parameters": [
           {
@@ -235,7 +256,7 @@
     },
     "/api/v1/update-package/{id}": {
       "patch": {
-        "tags": ["Order"],
+        "tags": ["Package"],
         "description": "",
         "parameters": [
           {
@@ -259,7 +280,7 @@
     },
     "/api/v1/delete-soft-package/{id}": {
       "patch": {
-        "tags": ["Order"],
+        "tags": ["Package"],
         "description": "",
         "parameters": [
           {
@@ -317,7 +338,7 @@
         }
       }
     },
-    "/api/v1/get-packageorderbyuserid": {
+    "/api/v1/get-package-order-by-user-id": {
       "get": {
         "tags": ["Order"],
         "description": "",
@@ -335,7 +356,7 @@
         }
       }
     },
-    "/api/v1/get-packageorderbyidpk/{id}": {
+    "/api/v1/get-package-order-by-idpk/{id}": {
       "get": {
         "tags": ["Order"],
         "description": "",
@@ -359,7 +380,7 @@
         }
       }
     },
-    "/api/v1/push-packageinperiod/{id}": {
+    "/api/v1/push-package-in-period/{id}": {
       "patch": {
         "tags": ["Order"],
         "description": "",
@@ -397,7 +418,7 @@
     },
     "/api/v1/get-current-period": {
       "get": {
-        "tags": ["Order"],
+        "tags": ["Period"],
         "description": "",
         "responses": {
           "200": {
@@ -408,7 +429,7 @@
     },
     "/api/v1/set-date/{id}": {
       "get": {
-        "tags": ["Order"],
+        "tags": ["Period"],
         "description": "",
         "parameters": [
           {
@@ -432,7 +453,7 @@
     },
     "/api/v1/create-period": {
       "post": {
-        "tags": ["Order"],
+        "tags": ["Period"],
         "description": "",
         "parameters": [
           {
@@ -450,7 +471,7 @@
     },
     "/api/v1/set-period/{id}": {
       "patch": {
-        "tags": ["Order"],
+        "tags": ["Period"],
         "description": "",
         "parameters": [
           {
@@ -474,7 +495,7 @@
     },
     "/api/v1/disable-period/{id}": {
       "patch": {
-        "tags": ["Order"],
+        "tags": ["Period"],
         "description": "",
         "parameters": [
           {
@@ -510,7 +531,7 @@
     },
     "/api/v1/create-theme": {
       "post": {
-        "tags": ["Product"],
+        "tags": ["Theme"],
         "description": "",
         "parameters": [
           {
@@ -528,7 +549,7 @@
     },
     "/api/v1/get-themes": {
       "get": {
-        "tags": ["Product"],
+        "tags": ["Theme"],
         "description": "",
         "parameters": [
           {
@@ -551,7 +572,7 @@
     },
     "/api/v1/delete-theme/{id}": {
       "patch": {
-        "tags": ["Product"],
+        "tags": ["Theme"],
         "description": "",
         "parameters": [
           {
@@ -587,7 +608,7 @@
     },
     "/api/v1/create-mysterybox": {
       "post": {
-        "tags": ["Product"],
+        "tags": ["MysteryBox"],
         "description": "",
         "responses": {
           "201": {
@@ -598,7 +619,7 @@
     },
     "/api/v1/get-mysterybox": {
       "get": {
-        "tags": ["Product"],
+        "tags": ["MysteryBox"],
         "description": "",
         "responses": {
           "200": {
