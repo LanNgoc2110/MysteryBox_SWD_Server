@@ -7,9 +7,12 @@ const { default: axios } = require("axios");
 const cloudinary = require("./config/cloundinary");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const multer = require("multer");
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger_output.json')
 require("./passport");
 
 const app = express();
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   folder: "MYSTERYBOX",
