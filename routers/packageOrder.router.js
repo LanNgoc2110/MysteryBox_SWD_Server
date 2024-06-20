@@ -10,9 +10,33 @@ router.post(
 );
 
 router.get(
-  "/get-packageorder",
+  "/get-packageorderbyuserid",
   verify.verifyToken,
   PackageOrderController.getPackageOrderByUserId
 );
-module.expo;
+
+router.get(
+  "/get-packageorderbyidpk/:id",
+  verify.verifyToken,
+  PackageOrderController.getPackageOrderByIdPk
+);
+
+router.patch(
+  "/push-packageinperiod/:id",
+  verify.verifyToken,
+  PackageOrderController.pushPackageInPeriod
+);
+
+router.get(
+  "/get-all-order",
+  verify.verifyToken,
+  verify.isStaff,
+  PackageOrderController.getAllOrder
+);
+router.get(
+  "/push-product-order/:packageOrderId",
+  PackageOrderController.pushProductOrder
+);
+
+router.get("/revenue-week", PackageOrderController.revenueWeekDashboard);
 module.exports = router;

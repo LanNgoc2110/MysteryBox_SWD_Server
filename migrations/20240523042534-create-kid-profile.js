@@ -6,11 +6,11 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
-        defaultValue: Sequelize.fn("UUID"),
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
       },
       userId: {
-        type: Sequelize.UUID,
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "Users",
@@ -18,8 +18,7 @@ module.exports = {
         },
       },
       themeId: {
-        type: Sequelize.UUID,
-        allowNull: false,
+        type: Sequelize.INTEGER,
         references: {
           model: "Themes",
           key: "id",

@@ -27,10 +27,16 @@ module.exports = {
       const kidProfilesByUserId = kidProfiles.filter(
         (profile) => profile.userId === user.userId
       );
+      const adult = await db.User.findByPk(user.userId);
+      const { password, role, status, ...otherDetails } = adult.toJSON();
+      const kidProfileArray = kidProfilesByUserId.map((profile) => ({
+        ...profile.toJSON(),
+        adult: otherDetails,
+      }));
       return res.json({
         success: true,
         message: "Tài khoản con của bạn đã lấy thành công",
-        kidProfilesByUserId,
+        kidProfiles: kidProfileArray,
       });
     } catch (error) {
       return next(createError(res, 500, error.message));

@@ -15,4 +15,20 @@ router.get(
   PackageInPeriodController.getPackageInPeriodByPackageOrder
 );
 
+router.get(
+  "/get-all-packageinperiod",
+  verify.verifyToken,
+  PackageInPeriodController.getAllPackageInPeriod
+);
+
+router.get(
+  "/add-product-packageinperiod/:productId/:packageOrderId",
+  PackageInPeriodController.addProductPackageInPeriod
+);
+
+router.patch(
+  "/update-status-packageinperiod/:packageInPeriodId",
+  PackageInPeriodController.updateStatusOrder
+);
+
 module.exports = router;
