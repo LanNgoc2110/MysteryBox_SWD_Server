@@ -15,8 +15,7 @@
       "type": "apiKey",
       "in": "header",
       "name": "authorization",
-      "description": "Bearer token to authorize",
-      "scheme": "bearer"
+      "description": "Bearer token to authorize"
     }
   },
   "tags": [
@@ -122,6 +121,11 @@
         "tags": [
           "Kid Profile"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -179,6 +183,11 @@
         "tags": [
           "Kid Profile"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -224,6 +233,11 @@
         "tags": [
           "Authenticate"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -244,6 +258,11 @@
       "post": {
         "tags": [
           "Package"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -297,6 +316,11 @@
         "tags": [
           "Package"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -342,6 +366,11 @@
         "tags": [
           "Package"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -362,6 +391,11 @@
       "post": {
         "tags": [
           "Order"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -389,6 +423,11 @@
         "tags": [
           "Order"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -404,10 +443,15 @@
         }
       }
     },
-    "/api/v1/get-package-order-by-idpk/{id}": {
+    "/api/v1/get-package-order-by-id-pk/{id}": {
       "get": {
         "tags": [
           "Order"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -434,6 +478,11 @@
       "patch": {
         "tags": [
           "Order"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -512,6 +561,11 @@
         "tags": [
           "Period"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -531,6 +585,11 @@
       "patch": {
         "tags": [
           "Period"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -557,6 +616,11 @@
       "patch": {
         "tags": [
           "Period"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -595,6 +659,11 @@
       "post": {
         "tags": [
           "Theme"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -641,6 +710,11 @@
         "tags": [
           "Theme"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -679,6 +753,11 @@
         "tags": [
           "MysteryBox"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "responses": {
           "201": {
@@ -691,6 +770,11 @@
       "get": {
         "tags": [
           "MysteryBox"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "responses": {
@@ -720,10 +804,15 @@
         }
       }
     },
-    "/api/v1/get-packageinperiod-by-packageOrder/{id}": {
+    "/api/v1/get-package-in-period-by-packageOrder/{id}": {
       "get": {
         "tags": [
           "Order"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -771,6 +860,11 @@
         "tags": [
           "Product"
         ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -790,6 +884,11 @@
       "post": {
         "tags": [
           "Product"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
@@ -902,6 +1001,11 @@
       "delete": {
         "tags": [
           "Product"
+        ],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
         ],
         "description": "",
         "parameters": [
