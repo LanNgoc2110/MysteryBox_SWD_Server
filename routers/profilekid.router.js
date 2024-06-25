@@ -24,6 +24,7 @@ router.patch(
 router.patch(
   "/ban-profile/:id",
   verify.verifyToken,
+  verify.isAdmin,
   ProfileKidController.bannedProfile
 );
 

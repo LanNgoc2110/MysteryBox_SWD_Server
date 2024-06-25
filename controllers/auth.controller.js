@@ -52,10 +52,12 @@ module.exports = {
         process.env.JWT_SECRET,
         { expiresIn: "7d" }
       );
+      const { password, ...otherDetails } = user.toJSON();
       return res.json({
         success: true,
         message: "Đăng nhập thành công",
-        accessToken: token
+        accessToken: token,
+        user: otherDetails,
       });
     } catch (error) {
       return next(createError(res, 500, error.message));

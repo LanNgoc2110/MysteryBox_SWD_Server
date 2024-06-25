@@ -7,9 +7,11 @@
   },
   "host": "mysterybox-swd-server-qkfx.onrender.com",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
-    "bearerAuth":{
+    "bearerAuth": {
       "type": "apiKey",
       "in": "header",
       "name": "authorization",
@@ -17,7 +19,6 @@
       "scheme": "bearer"
     }
   },
-  
   "tags": [
     {
       "name": "Authenticate",
@@ -51,12 +52,13 @@
       "name": "Period",
       "description": "APIs for periods"
     }
-    
   ],
   "paths": {
     "/api/v1/register": {
       "post": {
-        "tags": ["Authenticate"],
+        "tags": [
+          "Authenticate"
+        ],
         "description": "",
         "parameters": [
           {
@@ -65,10 +67,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "password": {
+                "username": {
                   "example": "any"
                 },
-                "username": {
+                "password": {
                   "example": "any"
                 },
                 "phone": {
@@ -87,7 +89,9 @@
     },
     "/api/v1/login": {
       "post": {
-        "tags": ["Authenticate"],
+        "tags": [
+          "Authenticate"
+        ],
         "description": "",
         "parameters": [
           {
@@ -115,13 +119,34 @@
     },
     "/api/v1/create-profile": {
       "post": {
-        "tags": ["Kid Profile"],
+        "tags": [
+          "Kid Profile"
+        ],
         "description": "",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fullName": {
+                  "example": "fullName"
+                },
+                "gender": {
+                  "example": "MALE/FEMALE"
+                },
+                "yob": {
+                  "example": "2017-08-15"
+                },
+                "themeId": {
+                  "example": "2f9a1666-1c03-11ef-9f88-a0510b5d5f6a"
+                },
+                "color": {
+                  "example": "red"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -133,15 +158,15 @@
     },
     "/api/v1/get-profiles": {
       "get": {
-        "tags": ["Kid Profile"],
-        "description": "",
-        "parameters": [
+        "tags": [
+          "Kid Profile"
+        ],
+        "security": [
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "bearerAuth": []
           }
         ],
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -151,42 +176,15 @@
     },
     "/api/v1/update-profile/{id}": {
       "patch": {
-        "tags": ["Kid Profile"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
+        "tags": [
+          "Kid Profile"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/ban-profile/{id}": {
-      "patch": {
-        "tags": ["Authenticate"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
             "type": "string"
           },
           {
@@ -195,8 +193,20 @@
             "schema": {
               "type": "object",
               "properties": {
-                "status": {
-                  "example": "any"
+                "fullName": {
+                  "example": "fullName"
+                },
+                "gender": {
+                  "example": "MALE/FEMALE"
+                },
+                "yob": {
+                  "example": "2017-08-15"
+                },
+                "themeId": {
+                  "example": "2f9a1666-1c03-11ef-9f88-a0510b5d5f6a"
+                },
+                "color": {
+                  "example": "red"
                 }
               }
             }
@@ -204,20 +214,62 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Updated"
+          }
+        }
+      }
+    },
+    "/api/v1/ban-profile/{id}": {
+      "patch": {
+        "tags": [
+          "Authenticate"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Banned"
           }
         }
       }
     },
     "/api/v1/create-package": {
       "post": {
-        "tags": ["Package"],
+        "tags": [
+          "Package"
+        ],
         "description": "",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Bộ đồ chơi xây dựng"
+                },
+                "description": {
+                  "example": "Bộ đồ chơi xây dựng giúp trẻ em phát triển kỹ năng sáng tạo và logic."
+                },
+                "image": {
+                  "example": "string"
+                },
+                "price": {
+                  "example": "370.000 VND"
+                },
+                "numberOfSend": {
+                  "example": 75
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -229,20 +281,10 @@
     },
     "/api/v1/get-package": {
       "get": {
-        "tags": ["Package"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "search",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "type": "string"
-          }
+        "tags": [
+          "Package"
         ],
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -252,42 +294,15 @@
     },
     "/api/v1/update-package/{id}": {
       "patch": {
-        "tags": ["Package"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
+        "tags": [
+          "Package"
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/v1/delete-soft-package/{id}": {
-      "patch": {
-        "tags": ["Package"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
             "type": "string"
           },
           {
@@ -296,8 +311,20 @@
             "schema": {
               "type": "object",
               "properties": {
-                "status": {
-                  "example": "any"
+                "name": {
+                  "example": "Bộ đồ chơi xây dựng"
+                },
+                "description": {
+                  "example": "Bộ đồ chơi xây dựng giúp trẻ em phát triển kỹ năng sáng tạo và logic."
+                },
+                "image": {
+                  "example": "string"
+                },
+                "price": {
+                  "example": "370.000 VND"
+                },
+                "numberOfSend": {
+                  "example": 75
                 }
               }
             }
@@ -310,9 +337,32 @@
         }
       }
     },
+    "/api/v1/delete-soft-package/{id}": {
+      "patch": {
+        "tags": [
+          "Package"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v1/add-order-package/{id}": {
       "post": {
-        "tags": ["Order"],
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -336,12 +386,14 @@
     },
     "/api/v1/get-package-order-by-user-id": {
       "get": {
-        "tags": ["Order"],
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
+            "name": "id",
+            "in": "path",
             "type": "string"
           }
         ],
@@ -354,7 +406,9 @@
     },
     "/api/v1/get-package-order-by-idpk/{id}": {
       "get": {
-        "tags": ["Order"],
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -378,7 +432,9 @@
     },
     "/api/v1/push-package-in-period/{id}": {
       "patch": {
-        "tags": ["Order"],
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -414,7 +470,9 @@
     },
     "/api/v1/get-current-period": {
       "get": {
-        "tags": ["Period"],
+        "tags": [
+          "Period"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -425,7 +483,9 @@
     },
     "/api/v1/set-date/{id}": {
       "get": {
-        "tags": ["Period"],
+        "tags": [
+          "Period"
+        ],
         "description": "",
         "parameters": [
           {
@@ -449,7 +509,9 @@
     },
     "/api/v1/create-period": {
       "post": {
-        "tags": ["Period"],
+        "tags": [
+          "Period"
+        ],
         "description": "",
         "parameters": [
           {
@@ -467,7 +529,9 @@
     },
     "/api/v1/set-period/{id}": {
       "patch": {
-        "tags": ["Period"],
+        "tags": [
+          "Period"
+        ],
         "description": "",
         "parameters": [
           {
@@ -491,7 +555,9 @@
     },
     "/api/v1/disable-period/{id}": {
       "patch": {
-        "tags": ["Period"],
+        "tags": [
+          "Period"
+        ],
         "description": "",
         "parameters": [
           {
@@ -527,7 +593,9 @@
     },
     "/api/v1/create-theme": {
       "post": {
-        "tags": ["Theme"],
+        "tags": [
+          "Theme"
+        ],
         "description": "",
         "parameters": [
           {
@@ -545,7 +613,9 @@
     },
     "/api/v1/get-themes": {
       "get": {
-        "tags": ["Theme"],
+        "tags": [
+          "Theme"
+        ],
         "description": "",
         "parameters": [
           {
@@ -568,7 +638,9 @@
     },
     "/api/v1/delete-theme/{id}": {
       "patch": {
-        "tags": ["Theme"],
+        "tags": [
+          "Theme"
+        ],
         "description": "",
         "parameters": [
           {
@@ -604,7 +676,9 @@
     },
     "/api/v1/create-mysterybox": {
       "post": {
-        "tags": ["MysteryBox"],
+        "tags": [
+          "MysteryBox"
+        ],
         "description": "",
         "responses": {
           "201": {
@@ -613,9 +687,11 @@
         }
       }
     },
-    "/api/v1/get-mysterybox": { 
+    "/api/v1/get-mysterybox": {
       "get": {
-        "tags": ["MysteryBox"],
+        "tags": [
+          "MysteryBox"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -626,7 +702,9 @@
     },
     "/api/v1/create-packageinperiod": {
       "post": {
-        "tags": ["Order"],
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -644,7 +722,9 @@
     },
     "/api/v1/get-packageinperiod-by-packageOrder/{id}": {
       "get": {
-        "tags": ["Order"],
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -668,7 +748,9 @@
     },
     "/api/v1/get-all-packageinperiod": {
       "get": {
-        "tags": ["Order"],
+        "tags": [
+          "Order"
+        ],
         "description": "",
         "parameters": [
           {
@@ -686,7 +768,9 @@
     },
     "/api/v1/create-product": {
       "post": {
-        "tags": ["Product"],
+        "tags": [
+          "Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -704,7 +788,9 @@
     },
     "/api/v1/random-product": {
       "post": {
-        "tags": ["Product"],
+        "tags": [
+          "Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -738,7 +824,9 @@
     },
     "/api/v1/get-product": {
       "get": {
-        "tags": ["Product"],
+        "tags": [
+          "Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -791,7 +879,9 @@
     },
     "/api/v1/get-productById/{id}": {
       "get": {
-        "tags": ["Product"],
+        "tags": [
+          "Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -810,7 +900,9 @@
     },
     "/api/v1/delete-productById/{id}": {
       "delete": {
-        "tags": ["Product"],
+        "tags": [
+          "Product"
+        ],
         "description": "",
         "parameters": [
           {
@@ -834,7 +926,9 @@
     },
     "/api/auth/google": {
       "get": {
-        "tags": ["Authenticate"],
+        "tags": [
+          "Authenticate"
+        ],
         "description": "",
         "responses": {
           "default": {

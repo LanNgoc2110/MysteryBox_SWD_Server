@@ -12,7 +12,7 @@ router.get("/get-package", PackageController.getPackages);
 router.patch(
   "/update-package/:id",
   verify.verifyToken,
-  verify.isStaff,
+  verify.isAdmin,
   PackageController.updatePackage
 );
 

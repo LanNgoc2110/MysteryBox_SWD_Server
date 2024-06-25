@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.post("/create-theme",
     verify.verifyToken,
-    verify.isAdmin,
-    ThemeController.createTheme);
+    verify.isStaff,
+     ThemeController.createTheme);
 
 router.get("/get-themes", ThemeController.getThemes);
 
 router.patch("/delete-theme/:id",
     verify.verifyToken,
-    verify.isAdmin,
-    ThemeController.deleteTheme);
+    verify.isStaff,
+     ThemeController.deleteTheme);
 module.exports = router;
