@@ -10,7 +10,7 @@ router.post(
 );
 
 router.get(
-  "/get-packageinperiod-by-packageOrder/:id",
+  "/get-package-in-period-by-packageOrder/:id",
   verify.verifyToken,
   PackageInPeriodController.getPackageInPeriodByPackageOrder
 );
@@ -22,17 +22,17 @@ router.get(
 );
 
 router.get(
-  "/add-product-packageinperiod/:productId/:packageOrderId",
+  "/add-product-package-in-period/:productId/:packageOrderId",
   PackageInPeriodController.addProductPackageInPeriod
 );
 
 router.patch(
-  "/update-status-packageinperiod/:packageInPeriodId",
+  "/update-status-package-in-period/:packageInPeriodId",
   PackageInPeriodController.updateStatusOrder
 );
 
 router.get(
-  "/get-packageinperiod-of-packageorder/:packageOrderId",
+  "/get-package-in-period-of-package-order/:packageOrderId",
   PackageInPeriodController.getPackageInPeriodOfPackageOrder
 );
 

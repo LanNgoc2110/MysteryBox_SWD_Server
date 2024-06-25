@@ -16,13 +16,13 @@ router.get(
 );
 
 router.get(
-  "/get-packageorder-by-id-pk/:id",
+  "/get-package-order-by-id-pk/:id",
   verify.verifyToken,
   PackageOrderController.getPackageOrderByIdPk
 );
 
 router.patch(
-  "/push-packageinperiod/:id",
+  "/push-package-in-period/:id",
   verify.verifyToken,
   PackageOrderController.pushPackageInPeriod
 );

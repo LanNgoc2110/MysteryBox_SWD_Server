@@ -429,13 +429,6 @@
           }
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -474,7 +467,7 @@
         }
       }
     },
-    "/api/v1/push-package-in-period/{id}": {
+    "/api/v1/push-package-in-period/{id}": { 
       "patch": {
         "tags": [
           "Order"
@@ -569,9 +562,21 @@
         "description": "",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "season":{
+                  "example": "Spring"
+                },
+                "startDate":{
+                  "example":"2024-06-12"
+                },
+                "endDate":{
+                  "example":"2024-12-12"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -597,11 +602,6 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
             "type": "string"
           }
         ],
@@ -629,23 +629,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -668,9 +651,21 @@
         "description": "",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "name":"body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "name":{
+                  "example": "Bach tuyet va 7 chu lun"
+                },
+                "description":{
+                  "example": "Cau chuyen ve bach tuyet"
+                },
+                "image":{
+                  "example": "string"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -686,18 +681,6 @@
           "Theme"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "search",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -722,23 +705,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -784,7 +750,7 @@
         }
       }
     },
-    "/api/v1/create-packageinperiod": {
+    "/api/v1/create-package-in-period": {
       "post": {
         "tags": [
           "Order"
@@ -804,7 +770,7 @@
         }
       }
     },
-    "/api/v1/get-package-in-period-by-packageOrder/{id}": {
+    "/api/v1/get-package-in-period-by-package-Order/{id}": {
       "get": {
         "tags": [
           "Order"
@@ -835,7 +801,7 @@
         }
       }
     },
-    "/api/v1/get-all-packageinperiod": {
+    "/api/v1/get-all-package-in-period": {
       "get": {
         "tags": [
           "Order"
@@ -927,48 +893,6 @@
           "Product"
         ],
         "description": "",
-        "parameters": [
-          {
-            "name": "boxIdQuery",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "themeIdQuery",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "originQuery",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "colorQuery",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "fromPrice",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "toPrice",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "search",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
