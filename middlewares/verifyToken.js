@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
   if (!token) return next(createError(res, 403, "Không cung cấp token"));
   jwt.verify(rawToken, process.env.JWT_SECRET, (error, decode) => {
     if (error) {
-      return next(createError(res, 403, "Token không hợp lệ"));
+      return next(createError(res, 403, "Token không hợp lế"));
     }
     req.user = decode;
     next();

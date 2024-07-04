@@ -1,13 +1,12 @@
 const express = require("express");
 const MysteryBoxController = require("../controllers/mysterybox.controller");
-const { verif } = require("jsonwebtoken");
 const router = express.Router();
-const verify = require("../middlewares/verifyToken");
 
-router.post("/create-mysterybox",
-    verify.verifyToken,
-    verify.isStaff,
-     MysteryBoxController.createMysteryBox);
+router.post("/create-mysterybox", MysteryBoxController.createMysteryBox); //api
 router.get("/get-mysterybox", MysteryBoxController.getMysteryBox);
+router.post(
+  "/get-mysterybox-condition",
+  MysteryBoxController.getMysteryBoxCondition
+);
 
 module.exports = router;

@@ -10,19 +10,19 @@ router.post(
 );
 
 router.get(
-  "/get-package-order-by-userid/:id",
+  "/get-packageorderbyuserid",
   verify.verifyToken,
   PackageOrderController.getPackageOrderByUserId
 );
 
 router.get(
-  "/get-package-order-by-id-pk/:id",
+  "/get-packageorderbyidpk/:id",
   verify.verifyToken,
   PackageOrderController.getPackageOrderByIdPk
 );
 
 router.patch(
-  "/push-package-in-period/:id",
+  "/push-packageinperiod/:id",
   verify.verifyToken,
   PackageOrderController.pushPackageInPeriod
 );

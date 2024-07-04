@@ -10,7 +10,7 @@ router.post(
 );
 
 router.get(
-  "/get-package-in-period-by-packageOrder/:id",
+  "/get-packageinperiod-by-packageOrder/:id",
   verify.verifyToken,
   PackageInPeriodController.getPackageInPeriodByPackageOrder
 );
@@ -21,18 +21,15 @@ router.get(
   PackageInPeriodController.getAllPackageInPeriod
 );
 
-router.get(
-  "/add-product-package-in-period/:productId/:packageOrderId",
-  PackageInPeriodController.addProductPackageInPeriod
-);
-
+router.get("/get-box-not-confirm", PackageInPeriodController.getBoxNotConfirm);
+router.get("/get-status-box", PackageInPeriodController.getStatusBox);
 router.patch(
-  "/update-status-package-in-period/:packageInPeriodId",
+  "/update-status-packageinperiod/:packageInPeriodId",
   PackageInPeriodController.updateStatusOrder
 );
 
 router.get(
-  "/get-package-in-period-of-package-order/:packageOrderId",
+  "/get-packageinperiod-of-packageorder/:packageOrderId",
   PackageInPeriodController.getPackageInPeriodOfPackageOrder
 );
 

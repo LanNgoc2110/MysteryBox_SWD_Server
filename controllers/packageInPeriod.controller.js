@@ -75,29 +75,31 @@ module.exports = {
 
   updateStatusOrder: async (req, res, next) => {
     try {
-      const { status } = req.body;
+      const { status, updateStatus } = req.body;
       const { packageInPeriodId } = req.params;
-      const packgeInPeriod = await db.PackageInPeriod.findByPk(
+      const packageInPeriod = await db.PackageInPeriod.findByPk(
         packageInPeriodId
       );
-      if (!packgeInPeriod) {
+      if (!packageInPeriod) {
         return next(createError(res, 404, "Không tìm thấy"));
       }
 
       const currentDate = new Date();
-      if (status === "packageDate") {
-        packgeInPeriod.packagingDate = currentDate;
+      if (status === "openingDate") {
+        packageInPeriod.openingDate = currentDate;
+      } else if (status === "packageDate") {
+        packageInPeriod.packagingDate = currentDate;
       } else if (status === "deliveryDate") {
-        packgeInPeriod.deliveryDate = currentDate;
+        packageInPeriod.deliveryDate = currentDate;
       } else if (status === "confirmDate") {
-        packgeInPeriod.confirmDate = currentDate;
+        packageInPeriod.confirmDate = currentDate;
       } else {
         return next(
           createError(res, 400, "Trạng thái truyền xuống không hợp lệ")
         );
       }
-
-      await packgeInPeriod.save();
+      packageInPeriod.status = updateStatus;
+      await packageInPeriod.save();
 
       return res.json({
         success: true,
@@ -146,6 +148,64 @@ module.exports = {
         })
       );
       return res.json({ success: true, data: result });
+    } catch (error) {
+      return next(createError(res, 500, error.message));
+    }
+  },
+
+  getBoxNotConfirm: async (req, res, next) => {
+    try {
+      const packageInPeriods = await db.PackageInPeriod.findAll();
+      const boxsNotConfirm = packageInPeriods.filter(
+        (el) => el.status === "OPEN"
+      );
+      const detailedBoxes = await Promise.all(
+        boxsNotConfirm.map(async (box) => {
+          const boxDetail = await db.MysteryBox.findByPk(box.boxId);
+          const packageDetail = await db.PackageOrder.findByPk(
+            box.packageOrderId
+          );
+          return {
+            ...box.dataValues,
+            boxDetail,
+            packageDetail,
+          };
+        })
+      );
+      return res.json({
+        success: true,
+        message: "Lấy data thành công",
+        packageInPeriods: detailedBoxes,
+      });
+    } catch (error) {
+      return next(createError(res, 500, error.message));
+    }
+  },
+
+  getStatusBox: async (req, res, next) => {
+    try {
+      const packageInPeriods = await db.PackageInPeriod.findAll();
+      const boxsNotConfirm = packageInPeriods.filter(
+        (el) => el.status !== "OPEN"
+      );
+      const detailedBoxes = await Promise.all(
+        boxsNotConfirm.map(async (box) => {
+          const boxDetail = await db.MysteryBox.findByPk(box.boxId);
+          const packageDetail = await db.PackageOrder.findByPk(
+            box.packageOrderId
+          );
+          return {
+            ...box.dataValues,
+            boxDetail,
+            packageDetail,
+          };
+        })
+      );
+      return res.json({
+        success: true,
+        message: "Lấy data thành công",
+        packageInPeriods: detailedBoxes,
+      });
     } catch (error) {
       return next(createError(res, 500, error.message));
     }
