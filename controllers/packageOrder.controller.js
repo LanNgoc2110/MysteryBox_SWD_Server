@@ -7,7 +7,6 @@ module.exports = {
     try {
       const body = req.body;
       const packageId = req.params.id;
-      console.log(body);
       const newOrder = await db.PackageOrder.create({
         ...body,
         packageId: packageId,
@@ -102,7 +101,7 @@ module.exports = {
         (el) => el.packageOrderId == packageOrderId
       );
       const periodsWithProduct = matchingPeriods.filter(
-        (el) => el.productId !== null
+        (el) => el.status !== "OPEN"
       );
 
       if (periodsWithProduct.length === 0) {
