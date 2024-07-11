@@ -38,9 +38,11 @@ module.exports = {
         type: Sequelize.FLOAT,
         defaultValue: 0,
       },
+      age: {
+        type: Sequelize.STRING,
+      },
       gender: {
-        type: Sequelize.ENUM(["female", "male", "all"]),
-        defaultValue: "all",
+        type: Sequelize.STRING,
       },
       color: {
         type: Sequelize.STRING,
