@@ -21,14 +21,16 @@ router.get(
   PackageInPeriodController.getAllPackageInPeriod
 );
 
-router.get(
-  "/add-product-packageinperiod/:productId/:packageOrderId",
-  PackageInPeriodController.addProductPackageInPeriod
-);
-
+router.get("/get-box-not-confirm", PackageInPeriodController.getBoxNotConfirm);
+router.get("/get-status-box", PackageInPeriodController.getStatusBox);
 router.patch(
   "/update-status-packageinperiod/:packageInPeriodId",
   PackageInPeriodController.updateStatusOrder
+);
+
+router.get(
+  "/get-packageinperiod-of-packageorder/:packageOrderId",
+  PackageInPeriodController.getPackageInPeriodOfPackageOrder
 );
 
 module.exports = router;

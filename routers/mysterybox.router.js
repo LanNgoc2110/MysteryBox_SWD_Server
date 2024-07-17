@@ -2,7 +2,11 @@ const express = require("express");
 const MysteryBoxController = require("../controllers/mysterybox.controller");
 const router = express.Router();
 
-router.post("/create-mysterybox", MysteryBoxController.createMysteryBox);
+router.post("/create-mysterybox", MysteryBoxController.createMysteryBox); //api
 router.get("/get-mysterybox", MysteryBoxController.getMysteryBox);
+router.post(
+  "/get-mysterybox-condition",
+  MysteryBoxController.getMysteryBoxCondition
+);
 
 module.exports = router;

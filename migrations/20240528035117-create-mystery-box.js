@@ -9,6 +9,17 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER,
       },
+      themeId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Themes",
+          key: "id",
+        },
+      },
+      age: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       name: {
         type: Sequelize.STRING,
       },
@@ -26,6 +37,9 @@ module.exports = {
       },
       quantityProInBox: {
         type: Sequelize.STRING,
+      },
+      productsId: {
+        type: Sequelize.TEXT,
       },
       status: {
         type: Sequelize.BOOLEAN,

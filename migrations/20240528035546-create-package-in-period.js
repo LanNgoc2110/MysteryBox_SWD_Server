@@ -9,14 +9,6 @@ module.exports = {
         autoIncrement: true,
         type: Sequelize.INTEGER,
       },
-      periodId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Periods",
-          key: "id",
-        },
-      },
       boxId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -33,16 +25,18 @@ module.exports = {
           key: "id",
         },
       },
-
-      productId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: "Products",
-          key: "id",
-        },
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
-
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      nameOfAdult: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       openingDate: {
         type: Sequelize.DATE,
         allowNull: true,
