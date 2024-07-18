@@ -229,9 +229,9 @@
       }
     },
     "/api/v1/ban-profile/{id}": {
-      "patch": {
+      "delete": {
         "tags": [
-          "Authenticate"
+          "Kid Profile"
         ],
         "security": [
           {
@@ -362,7 +362,7 @@
       }
     },
     "/api/v1/delete-soft-package/{id}": {
-      "patch": {
+      "delete": {
         "tags": [
           "Package"
         ],
@@ -428,6 +428,7 @@
     },
     "/api/v1/get-package-order-by-idpk/{id}": {
       "get": {
+        "tags": ["Package"],
         "description": "",
         "parameters": [
           {
@@ -446,6 +447,12 @@
     },
     "/api/v1/push-package-in-period/{id}": {
       "patch": {
+        "tags": ["Package"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -476,6 +483,12 @@
     },
     "/api/v1/get-all-order": {
       "get": {
+        "tags": ["Order"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -493,6 +506,12 @@
     },
     "/api/v1/push-product-order/{packageOrderId}": {
       "get": {
+        "tags": ["Order"], 
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -511,6 +530,12 @@
     },
     "/api/v1/revenue-week": {
       "get": {
+        "tags": ["DashBoard"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -521,6 +546,12 @@
     },
     "/api/v1/get-current-period": {
       "get": {
+        "tags": ["Period"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -534,6 +565,12 @@
     },
     "/api/v1/set-date/{id}": {
       "get": {
+        "tags": ["Period"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -557,6 +594,12 @@
     },
     "/api/v1/create-period": {
       "post": {
+        "tags": ["Period"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -574,6 +617,12 @@
     },
     "/api/v1/set-period/{id}": {
       "get": {
+        "tags": ["Period"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -597,6 +646,12 @@
     },
     "/api/v1/disable-period/{id}": {
       "patch": {
+        "tags": ["Period"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -632,7 +687,32 @@
     },
     "/api/v1/create-theme": {
       "post": {
+        "tags": ["Theme"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "name":{
+                  "example":"string"
+                },
+                "description":{
+                  "example":"string"
+                },
+                "image":{
+                  "example":"string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -642,19 +722,13 @@
     },
     "/api/v1/get-themes": {
       "get": {
-        "description": "",
-        "parameters": [
+        "tags": ["Theme"],
+        "security": [
           {
-            "name": "search",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "type": "string"
+            "bearerAuth":[]
           }
         ],
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -663,7 +737,13 @@
       }
     },
     "/api/v1/delete-theme/{id}": {
-      "patch": {
+      "delete": {
+        "tags": ["Theme"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -694,7 +774,41 @@
     },
     "/api/v1/create-mysterybox": {
       "post": {
+        "tags": ["MysteryBox"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "name":{
+                  "example": "string"
+                },
+                "ageRange":{
+                  "example": "string"
+                },
+                "price":{
+                  "example":"string"
+                },
+                "quantity":{
+                  "example":"number"
+                },
+                "description":{
+                  "example":"string"
+                },
+                "image":{
+                  "example":"string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -704,6 +818,7 @@
     },
     "/api/v1/get-mysterybox": {
       "get": {
+        "tags": ["MysteryBox"],
         "description": "",
         "responses": {
           "200": {
@@ -714,6 +829,12 @@
     },
     "/api/v1/get-mysterybox-condition": {
       "post": {
+        "tags": ["MysteryBox"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -741,12 +862,37 @@
     },
     "/api/v1/create-packageinperiod": {
       "post": {
+        "tags": ["Period"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type":"object",
+              "properties": {
+                "name":{
+                  "example":"string"
+                },
+                "ageRange":{
+                  "example":"3-5"
+                },
+                "price":{
+                  "example":100000
+                },
+                "quantity":{
+                  "example": 2
+                },
+                "description":{
+                  "example":"string"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -758,17 +904,18 @@
     },
     "/api/v1/get-packageinperiod-by-packageOrder/{id}": {
       "get": {
+        "tags": ["Order"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
             "type": "string"
           }
         ],
@@ -781,13 +928,14 @@
     },
     "/api/v1/get-all-packageinperiod": {
       "get": {
+        "tags": ["Package"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
         ],
         "responses": {
           "200": {
@@ -798,6 +946,12 @@
     },
     "/api/v1/get-box-not-confirm": {
       "get": {
+        "tags": ["MysteryBox"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -808,6 +962,12 @@
     },
     "/api/v1/get-status-box": {
       "get": {
+        "tags": ["MysteryBox"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -818,6 +978,12 @@
     },
     "/api/v1/update-status-packageinperiod/{packageInPeriodId}": {
       "patch": {
+        "tags": ["Period"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -834,9 +1000,6 @@
               "properties": {
                 "status": {
                   "example": "any"
-                },
-                "updateStatus": {
-                  "example": "any"
                 }
               }
             }
@@ -851,6 +1014,12 @@
     },
     "/api/v1/get-packageinperiod-of-packageorder/{packageOrderId}": {
       "get": {
+        "tags": ["Order"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -872,7 +1041,63 @@
     },
     "/api/v1/create-product": {
       "post": {
+        "tags": ["Product"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type":"object",
+              "properties": {
+                "name":{
+                  "example":"string"
+                },
+                "type":{
+                  "example":"string"
+                },
+                "ageRange":{
+                  "example": "3-5"
+                },
+                "material":{
+                  "example":"glass"
+                },
+                "price":{
+                  "example":30000
+                },
+                "quantity":{
+                  "example":1000
+                },
+                "gender":{
+                  "example":"Male/Female/Other"
+                },
+                "color":{
+                  "example":"green"
+                },
+                "productCode":{
+                  "example":"CP-202"
+                },
+                "themeId":{
+                  "example":"string"
+                },
+                "origin":{
+                  "example":"VietNam"
+                },
+                "description":{
+                  "example":"string"
+                },
+                "image":{
+                  "example":"string"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -882,6 +1107,12 @@
     },
     "/api/v1/random-product/{kidId}/{packageId}": {
       "get": {
+        "tags": ["Product"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -906,6 +1137,12 @@
     },
     "/api/v1/get-product": {
       "get": {
+        "tags": ["Product"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -958,6 +1195,12 @@
     },
     "/api/v1/get-productById/{id}": {
       "get": {
+        "tags": ["Product"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -976,6 +1219,12 @@
     },
     "/api/v1/delete-productById/{id}": {
       "delete": {
+        "tags": ["Product"],
+        "security": [
+          {
+            "bearerAuth":[]
+          }
+        ],
         "description": "",
         "parameters": [
           {
@@ -994,6 +1243,7 @@
     },
     "/api/v1/update-profile-user/{id}": {
       "patch": {
+        "tags": ["Authenticate"],
         "description": "",
         "parameters": [
           {
@@ -1003,9 +1253,25 @@
             "type": "string"
           },
           {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type":"object",
+              "properties": {
+                  "fullName":{
+                    "example": "string"
+                  },
+                  "email":{
+                    "example": "string"
+                  },
+                  "phone":{
+                    "example": "string"
+                  },
+                  "address": {
+                    "example": "string  "
+                  }
+              }
+            }
           }
         ],
         "responses": {
@@ -1017,6 +1283,7 @@
     },
     "/api/auth/google": {
       "get": {
+        "tags": ["Authenticate"],
         "description": "",
         "responses": {
           "default": {
@@ -1027,6 +1294,7 @@
     },
     "/api/auth/google/callback": {
       "get": {
+        "tags": ["Authenticate"],
         "description": "",
         "responses": {
           "default": {
@@ -1037,6 +1305,7 @@
     },
     "/api/auth/login-oauth-success": {
       "post": {
+        "tags": ["Authenticate"],
         "description": "",
         "responses": {
           "default": {
@@ -1044,63 +1313,12 @@
           }
         }
       }
-    },
-    "/register": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "password": {
-                  "example": "any"
-                },
-                "username": {
-                  "example": "any"
-                },
-                "phone": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          }
-        }
-      }
-    },
-    "/login": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
-  }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+  
 }
