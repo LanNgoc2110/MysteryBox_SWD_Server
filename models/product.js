@@ -13,9 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Product.init(
     {
-      boxId: DataTypes.INTEGER,
+      productCode: DataTypes.STRING,
       themeId: DataTypes.INTEGER,
       name: DataTypes.STRING,
+      age: DataTypes.STRING,
       images: {
         type: DataTypes.TEXT,
         get() {
@@ -29,10 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.STRING,
       price: DataTypes.FLOAT,
       quantity: DataTypes.FLOAT,
-      gender: {
-        type: DataTypes.ENUM,
-        values: ["female", "male", "all"],
-      },
+      gender: DataTypes.STRING,
       color: DataTypes.STRING,
       type: DataTypes.STRING,
       material: DataTypes.STRING,

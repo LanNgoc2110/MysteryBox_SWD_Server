@@ -26,5 +26,17 @@ router.patch(
   verify.verifyToken,
   PackageOrderController.pushPackageInPeriod
 );
-module.expo;
+
+router.get(
+  "/get-all-order",
+  verify.verifyToken,
+  verify.isStaff,
+  PackageOrderController.getAllOrder
+);
+router.get(
+  "/push-product-order/:packageOrderId",
+  PackageOrderController.pushProductOrder
+);
+
+router.get("/revenue-week", PackageOrderController.revenueWeekDashboard);
 module.exports = router;
