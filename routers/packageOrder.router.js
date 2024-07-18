@@ -9,6 +9,12 @@ router.post(
   PackageOrderController.orderPackage
 );
 
+router.patch(
+  "/update-status/:id",
+  verify.verifyToken,
+  PackageOrderController.updateStatus
+);
+
 router.get(
   "/get-packageorderbyuserid",
   verify.verifyToken,
@@ -33,10 +39,22 @@ router.get(
   verify.isStaff,
   PackageOrderController.getAllOrder
 );
+
+router.post(
+  "/get-order-by-date",
+  verify.verifyToken,
+  verify.isStaff,
+  PackageOrderController.getOrderByDate
+);
 router.get(
   "/push-product-order/:packageOrderId",
   PackageOrderController.pushProductOrder
 );
 
 router.get("/revenue-week", PackageOrderController.revenueWeekDashboard);
+router.post("/revenue-date", PackageOrderController.revenueDateDashboard);
+router.get(
+  "/revenue-month/:month",
+  PackageOrderController.revenueMontthDashboard
+);
 module.exports = router;

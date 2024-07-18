@@ -14,9 +14,33 @@ module.exports = {
 
       return res.status(201).json({
         success: true,
-        messsage: "Thêm package vào giỏ hàng thành công",
+        messsage: "Add order success",
         order: newOrder,
       });
+    } catch (error) {
+      return next(createError(res, 500, error.message));
+    }
+  },
+
+  updateStatus: async (req, res, next) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const allowedStatuses = ["Pending", "Cancel", "Finished"];
+    if (!allowedStatuses.includes(status)) {
+      return res.status(400).json({ error: "Invalid status value" });
+    }
+
+    try {
+      const packageOrder = await db.PackageOrder.findByPk(id);
+
+      if (!packageOrder) {
+        return res.status(404).json({ error: "PackageOrder not found" });
+      }
+
+      packageOrder.status = status;
+      await packageOrder.save();
+
+      return res.status(200).json({ message: "Status updated successfully" });
     } catch (error) {
       return next(createError(res, 500, error.message));
     }
@@ -43,16 +67,19 @@ module.exports = {
       const kidIds = kidProfiles
         .filter((kidProfile) => kidProfile.userId === user.userId)
         .map((kidProfile) => kidProfile.id);
+
       const packageOrders = await db.PackageOrder.findAll({
         where: {
           kidId: {
             [db.Sequelize.Op.in]: kidIds,
           },
         },
+        order: [["updatedAt", "DESC"]],
       });
+
       return res.json({
         success: true,
-        message: "Lấy dữ liệu package order thành công",
+        message: "Get data success",
         packageOrders,
       });
     } catch (error) {
@@ -64,6 +91,50 @@ module.exports = {
     try {
       const orders = await db.PackageOrder.findAll();
       return res.json({ success: true, orders });
+    } catch (error) {
+      return next(createError(res, 500, error.message));
+    }
+  },
+
+  getOrderByDate: async (req, res, next) => {
+    try {
+      const { startDate, endDate } = req.body;
+
+      let whereCondition = {};
+      if (startDate && endDate) {
+        const start = moment(startDate, "YYYY-MM-DD").startOf("day").toDate();
+        const end = moment(endDate, "YYYY-MM-DD").endOf("day").toDate();
+
+        whereCondition = {
+          createdAt: {
+            [Op.between]: [start, end],
+          },
+        };
+      }
+
+      const orders = await db.PackageOrder.findAll({
+        where: whereCondition,
+      });
+      const packageIds = orders.map((order) => order.packageId);
+      const packages = await db.Package.findAll({
+        where: {
+          id: {
+            [Op.in]: packageIds,
+          },
+        },
+      });
+      const packageMap = packages.reduce((acc, pkg) => {
+        acc[pkg.id] = pkg;
+        return acc;
+      }, {});
+      const ordersWithPackage = orders.map((order) => {
+        return {
+          ...order.toJSON(),
+          package: packageMap[order.packageId] || null,
+        };
+      });
+
+      return res.json({ success: true, orders: ordersWithPackage });
     } catch (error) {
       return next(createError(res, 500, error.message));
     }
@@ -83,7 +154,7 @@ module.exports = {
       });
       return res.json({
         success: true,
-        message: "Thêm gói package nhỏ thành công",
+        message: "Add box success",
         packageOrder: updatePackageOrder,
       });
     } catch (error) {
@@ -156,6 +227,14 @@ module.exports = {
         },
       });
 
+      const newAccountsThisWeek = await db.User.findAll({
+        where: {
+          createdAt: {
+            [Op.between]: [startOfWeek, endOfWeek],
+          },
+        },
+      });
+
       let countThisWeek = ordersThisWeek.length;
       let sumMoneyThisWeek = ordersThisWeek.reduce((sum, order) => {
         const totalPrice = parseFloat(order.totalPrice.replace(/,/g, "")) || 0;
@@ -173,21 +252,119 @@ module.exports = {
           ((sumMoneyThisWeek - sumMoneyLastWeek) / sumMoneyLastWeek) * 100;
       }
 
+      let totalNewAccountsThisWeek = newAccountsThisWeek.length;
+
       return res.json({
         success: true,
-        countThisWeek,
-        sumMoneyThisWeek,
+        countOrders: countThisWeek,
+        sumMoneyInDateRange: sumMoneyThisWeek,
         growthRate,
+        totalNewAccountsInDateRange: totalNewAccountsThisWeek,
       });
     } catch (error) {
-      console.error("Error in revenueWeekDashboard:", error);
-      return next(
-        createError(
-          res,
-          500,
-          "An error occurred while calculating revenue. Please try again later."
-        )
+      return next(createError(res, 500, error.message));
+    }
+  },
+  revenueDateDashboard: async (req, res, next) => {
+    try {
+      const { startDate, endDate } = req.body;
+
+      if (!startDate || !endDate) {
+        return next(
+          createError(400, "Both startDate and endDate are required.")
+        );
+      }
+
+      const start = moment(startDate, "YYYY-MM-DD").startOf("day").toDate();
+      const end = moment(endDate, "YYYY-MM-DD").endOf("day").toDate();
+
+      const ordersInDateRange = await db.PackageOrder.findAll({
+        where: {
+          createdAt: {
+            [Op.between]: [start, end],
+          },
+        },
+      });
+
+      const newAccountsInDateRange = await db.User.findAll({
+        where: {
+          createdAt: {
+            [Op.between]: [start, end],
+          },
+        },
+      });
+
+      let countOrders = ordersInDateRange.length;
+      let sumMoneyInDateRange = ordersInDateRange.reduce((sum, order) => {
+        const totalPrice = parseFloat(order.totalPrice.replace(/,/g, "")) || 0;
+        return sum + totalPrice;
+      }, 0);
+
+      let totalNewAccountsInDateRange = newAccountsInDateRange.length;
+
+      return res.json({
+        success: true,
+        countOrders,
+        sumMoneyInDateRange,
+        totalNewAccountsInDateRange,
+      });
+    } catch (error) {
+      return next(createError(res, 500, error.message));
+    }
+  },
+  revenueMontthDashboard: async (req, res, next) => {
+    try {
+      const { month } = req.params;
+      const startOfMonth = moment(month, "MM").startOf("month").toDate();
+      const endOfMonth = moment(month, "MM").endOf("month").toDate();
+
+      const weeks = [];
+      let currentWeekStart = startOfMonth;
+
+      while (currentWeekStart <= endOfMonth) {
+        const currentWeekEnd = moment(currentWeekStart).endOf("week").toDate();
+        weeks.push({
+          start: currentWeekStart,
+          end: currentWeekEnd > endOfMonth ? endOfMonth : currentWeekEnd,
+        });
+        currentWeekStart = moment(currentWeekStart)
+          .add(1, "weeks")
+          .startOf("week")
+          .toDate();
+      }
+
+      const revenues = await Promise.all(
+        weeks.map(async (week, index) => {
+          const orders = await db.PackageOrder.findAll({
+            where: {
+              createdAt: {
+                [Op.between]: [week.start, week.end],
+              },
+            },
+          });
+
+          const sumMoney = orders.reduce((sum, order) => {
+            const totalPrice =
+              parseFloat(order.totalPrice.replace(/,/g, "")) || 0;
+            return sum + totalPrice;
+          }, 0);
+
+          return {
+            [`week${index + 1}`]: sumMoney,
+          };
+        })
       );
+
+      const data = revenues.reduce((result, weekData) => {
+        return { ...result, ...weekData };
+      }, {});
+
+      return res.json({
+        success: true,
+        data,
+      });
+    } catch (error) {
+      return next(createError(res, 500, error.message));
     }
   },
 };
