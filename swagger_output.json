@@ -5,7 +5,7 @@
     "title": "MysteryBoxAPIs",
     "description": "All APIs for MysteryBoxAPIs website"
   },
-  "host": "mysterybox-swd-server-qkfx.onrender.com",
+  "host": "mysterybox-swd-server-on-air.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
