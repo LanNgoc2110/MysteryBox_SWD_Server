@@ -148,6 +148,12 @@
                 },
                 "color": {
                   "example": "red"
+                },
+                "material": {
+                  "example": "Wood"
+                },
+                "origin": {
+                  "example": "China"
                 }
               }
             }
@@ -399,7 +405,40 @@
             "in": "path",
             "required": true,
             "type": "string"
-          }  
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "codeOrder": {
+                  "example": "Order-99999"
+                },
+                "kidId": {
+                  "example": 1
+                },
+                "totalPrice": {
+                  "example": 500000
+                },
+                "nameOfAdult": {
+                  "example": "Nguyen van A"
+                },
+                "nameOfKid": {
+                  "example": "Nguyen van con"
+                },
+                "phone": {
+                  "example": "0123456789"
+                },
+                "email": {
+                  "example": "email@gamil.com"
+                },
+                "address": {
+                  "example": "123 Ben Van Don"
+                }
+              }
+            }
+          }
         ],
         "responses": {
           "201": {
@@ -790,13 +829,13 @@
                 "name":{
                   "example": "string"
                 },
-                "ageRange":{
+                "age":{
                   "example": "string"
                 },
-                "price":{
+                "priceAvarage":{
                   "example":"string"
                 },
-                "quantity":{
+                "quantityProInBox":{
                   "example":"number"
                 },
                 "description":{
@@ -804,6 +843,9 @@
                 },
                 "image":{
                   "example":"string"
+                },
+                "qrCode":{
+                  "example":"#ABC123"
                 }
               }
             }
